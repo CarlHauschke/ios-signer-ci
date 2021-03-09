@@ -21,6 +21,8 @@ security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "1234" >/d
 IDENTITY=$(security find-identity -p appleID -v | grep -o '".*"' | cut -d '"' -f 2)
 
 echo "Signing..."
+echo "DEBUG: identity: $IDENTITY"
+echo "DEBUG: sugn args: $SIGN_ARGS"
 ./xresign.sh -i unsigned.ipa -c "$IDENTITY" -p "prov.mobileprovision" $SIGN_ARGS
 rm unsigned.ipa
 mv *.ipa file.ipa
