@@ -19,6 +19,8 @@ echo "Importing certificate..."
 security import "cert.p12" -P "$CERT_PASS" -A
 security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "1234" >/dev/null 2>&1
 echo "DEBUG: signing identity"
+security find-identity -p codesigning -v
+security find-identity -p codesigning -v | grep -o '".*"'
 security find-identity -p codesigning -v | grep -o '".*"' | cut -d '"' -f 2
 IDENTITY=$(security find-identity -p codesigning -v | grep -o '".*"' | cut -d '"' -f 2)
 
