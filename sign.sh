@@ -16,7 +16,7 @@ security unlock-keychain -p "1234" "sign"
 security default-keychain -s "sign"
 
 echo "Importing certificate..."
-security import "cert.p12" -P "$CERT_PASS" -A
+security import "cert.p12" -P "$CERT_PASS" -A -k "sign"
 security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "1234" >/dev/null 2>&1
 echo "DEBUG: signing identity"
 security find-identity
